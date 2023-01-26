@@ -2,7 +2,7 @@ using Scene.SceneControl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
+using Gameplay.Items.Manager;
 
 namespace Scene.Finish
 {

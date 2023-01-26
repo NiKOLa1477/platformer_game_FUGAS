@@ -36,7 +36,7 @@ namespace Gameplay.Movement.Ladder
                 rb.gravityScale = 0f;
                 rb.velocity = new Vector2(rb.velocity.x, vertical * ladderSpeed);
             }
-            else
+            else if (PlayerMovement.canMoving())
                 rb.gravityScale = 1f;
         }
 

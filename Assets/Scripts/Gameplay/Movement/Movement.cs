@@ -43,7 +43,11 @@ namespace Gameplay.Movement
         {
             return Physics2D.OverlapCircle(groundCheck.position, GROUND_CHECK_RADIUS, groundLayer);
         }
-        public void blockMovement() { canMove = !canMove; }
+        public void blockMovement() 
+        {          
+            canMove = !canMove;
+            rb.gravityScale = (canMove) ? 1f : 0f; 
+        }
         public bool canMoving() { return canMove; }
         public bool isMoving() { return rb.velocity.magnitude > 0.1f; }
         private void Flip()

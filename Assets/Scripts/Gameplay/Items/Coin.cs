@@ -2,15 +2,19 @@ using Scene.SceneControl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Gameplay.Items.Manager;
 
-public class Coin : MonoBehaviour, ICollectable
+namespace Gameplay.Items.Coins
 {
-    [SerializeField] private int amount;
-    [SerializeField] private ItemManager items;   
-    public void Collect()
+    public class Coin : MonoBehaviour, ICollectable
     {
-        items.addScore(amount);
-        SceneController.getInstance().AddObject(transform);
-        gameObject.SetActive(false);
+        [SerializeField] private int amount;
+        [SerializeField] private ItemManager items;
+        public void Collect()
+        {
+            items.addScore(amount);
+            SceneController.getInstance().AddObject(transform);
+            gameObject.SetActive(false);
+        }
     }
 }
