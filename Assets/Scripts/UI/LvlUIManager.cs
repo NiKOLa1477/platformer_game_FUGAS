@@ -1,6 +1,4 @@
 using Gameplay.Movement;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,10 +9,12 @@ namespace UI.Level
     {
         [SerializeField] private TMP_Text ScoreText, LivesText;
         [SerializeField] private GameObject PauseWind;
-        [SerializeField] private Movement Hero;
         [SerializeField] private Button PauseBtn;
+        private Movement Hero;
+        
         private void Awake()
         {
+            Hero = FindObjectOfType<Movement>();
             LivesText.text = "3";
             ScoreText.text = (PlayerPrefs.HasKey("Score")) ? PlayerPrefs.GetInt("Score").ToString() : "0";
         }

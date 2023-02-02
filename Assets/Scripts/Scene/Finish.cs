@@ -1,6 +1,4 @@
 using Scene.SceneControl;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Gameplay.Items.Manager;
 

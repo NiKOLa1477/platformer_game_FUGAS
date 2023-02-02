@@ -1,10 +1,8 @@
 using Scene.SceneControl;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Gameplay.Items.Manager;
 
-namespace Gameplay.Items.Coins
+namespace Gameplay.Items
 {
     public class Coin : MonoBehaviour, ICollectable
     {

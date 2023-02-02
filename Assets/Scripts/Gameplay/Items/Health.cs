@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using Gameplay.Items.Manager;
 using Scene.SceneControl;
 using UnityEngine;
 
-namespace Gameplay.Items.Lives
+namespace Gameplay.Items
 {
     public class Health : MonoBehaviour, ICollectable
     {

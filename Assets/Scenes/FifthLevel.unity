@@ -6296,7 +6296,6 @@ MonoBehaviour:
   ScoreText: {fileID: 1163633175}
   LivesText: {fileID: 1857860743}
   PauseWind: {fileID: 241703492}
-  Hero: {fileID: 1658560553}
   PauseBtn: {fileID: 861818173}
 --- !u!1001 &387815934
 PrefabInstance:
@@ -17955,17 +17954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0ff422a2fd5524c9e236a0f470dc50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1658560553 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5864985511864580891, guid: 95ab87cab16944449b58812333757013, type: 3}
-  m_PrefabInstance: {fileID: 5864985512365497144}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 745389560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39d9d1865f78b5340917a50c089e999a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1680863622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20000,9 +19988,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dcebce52e940c44baae3486fc5497cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hero: {fileID: 1658560546}
-  items: {fileID: 1658560550}
-  UIManager: {fileID: 373980903}
 --- !u!4 &2136012495
 Transform:
   m_ObjectHideFlags: 0
@@ -20278,6 +20263,62 @@ PrefabInstance:
       propertyPath: UIManager
       value: 
       objectReference: {fileID: 373980903}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onLivesChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onScoreChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onLivesChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onScoreChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onLivesChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 373980903}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onScoreChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 373980903}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onLivesChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onScoreChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onLivesChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdLives
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onScoreChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdScore
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onLivesChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UI.Level.LvlUIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onScoreChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UI.Level.LvlUIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onLivesChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658560550, guid: 95ab87cab16944449b58812333757013, type: 3}
+      propertyPath: onScoreChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5864985511864580890, guid: 95ab87cab16944449b58812333757013, type: 3}
       propertyPath: m_RootOrder
       value: 2

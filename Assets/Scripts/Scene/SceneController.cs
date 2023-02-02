@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UI.Level;
-using Unity.VisualScripting;
+using DataManager;
 using Gameplay.Items.Manager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,11 +11,12 @@ namespace Scene.SceneControl
     {
         private static SceneController instance;
         private int lastLevelIndex;
-        private static int firstLevelIndex = 2;
+        private static int firstLevelIndex = 4;
         private List<Transform> objectsPos = new List<Transform>();              
-        [SerializeField] private Transform Hero;
-        [SerializeField] private ItemManager items;
-        [SerializeField] private LvlUIManager UIManager;
+        private Transform Hero;
+        private ItemManager items;
+        private LvlUIManager UIManager;
+        private static bool isLoaded;
 
         private void Awake()
         {
@@ -24,24 +24,29 @@ namespace Scene.SceneControl
             {
                 Destroy(gameObject);
             }
-            instance = this;
+            instance = this;           
             DeleteCheckpoint();
-            ClearObjects();
+            ClearObjects();           
             lastLevelIndex = SceneManager.GetActiveScene().buildIndex;
+            if(lastLevelIndex == 0 && !isLoaded) 
+            { 
+                PlayerManager.Init(firstLevelIndex); 
+                isLoaded = true; 
+            }           
+            if (lastLevelIndex >= firstLevelIndex)
+            {                
+                items = FindObjectOfType<ItemManager>();
+                Hero = items.transform;
+                UIManager = FindObjectOfType<LvlUIManager>();
+            }
             lastLevelIndex = (lastLevelIndex < firstLevelIndex) ? getLastLevelInd() : lastLevelIndex;
             PlayerPrefs.SetInt("LastLvlInd", lastLevelIndex);
         }
 
         public static SceneController getInstance() { return instance; }
-        public void FirstOrLastLevel()
-        {
-            SceneManager.LoadScene(getLastLevelInd());
-        }
-        public void Menu()
-        {
-            SceneManager.LoadScene(0);
-        }
-        public void Exit() { Application.Quit(); }
+        public void FirstOrLastLevel() { Load(getLastLevelInd()); }
+        public void Menu() { PlayerManager.SavePlayers(); Load(0); }
+        public void Exit() { PlayerManager.SavePlayers(); Application.Quit(); }
         public void NextLevel()
         {
             DeleteCheckpoint();
@@ -50,10 +55,14 @@ namespace Scene.SceneControl
                 Menu();
             else
             {                         
-                SceneManager.LoadScene(lastLevelIndex + 1);
+                Load(lastLevelIndex + 1);
             }              
         }
-        public void LoadLevel(int index) { SceneManager.LoadScene(index); }
+        public void Levels() { Load(1); }
+        public void Options() { Load(2); }
+        public void Records() { Load(3); }
+        private void Load(int index) { SceneManager.LoadScene(index); }
+        public void LoadLevel(int levelCount) { Load(firstLevelIndex - 1 + levelCount); }
         private int getLastLevelInd()
         {
             if (PlayerPrefs.HasKey("LastLvlInd"))
@@ -65,7 +74,7 @@ namespace Scene.SceneControl
         {
             if (PlayerPrefs.HasKey("checkX") && items.getLives() > 0)
             {
-                items.RemoveLife();
+                items.RemoveLife();                
                 UIManager.onPauseBtn();
                 UIManager.blockPauseBtn();
                 Hero.transform.position = new Vector2(PlayerPrefs.GetFloat("checkX"), PlayerPrefs.GetFloat("checkY"));
@@ -77,7 +86,7 @@ namespace Scene.SceneControl
             {
                 DeleteCheckpoint();
                 ClearObjects();                
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                Load(SceneManager.GetActiveScene().buildIndex);
             }
             
         }
@@ -89,10 +98,7 @@ namespace Scene.SceneControl
                 PlayerPrefs.DeleteKey("checkY");
             }
         } 
-        public void AddObject(Transform obj)
-        {          
-            objectsPos.Add(obj);           
-        }
+        public void AddObject(Transform obj) { objectsPos.Add(obj); }
         public void ClearObjects()
         {
             for (int i = objectsPos.Count - 1; i >= 0; i--)
@@ -100,7 +106,7 @@ namespace Scene.SceneControl
                 objectsPos.RemoveAt(i);                
             }              
         }
-        public void RestoreItems()
+        private void RestoreItems()
         {
             for (int i = 1; i < objectsPos.Count; i++)
             {
