@@ -45,6 +45,8 @@ namespace DataManager
             else
                 AddNewPlayer(name);
         }
+        public static void RemovePlayer(string name) { Players.Remove(name); }
+        public static void DeletePlayers() { Players.Clear(); }
         private static void setTopPlayers()
         {
             topPlayers = new List<string>();

@@ -11,6 +11,7 @@ namespace Gameplay.Movement
         private Rigidbody2D rb;
         private bool canMove = true;
         private bool isFacingRight = true;
+        [SerializeField] private FixedJoystick joystick;
 
         [SerializeField] private Transform groundCheck;
         private const float GROUND_CHECK_RADIUS = 0.2f;
@@ -24,14 +25,17 @@ namespace Gameplay.Movement
         }
         private void Update()
         {
+            #if UNITY_STANDALONE
             horizontal = Input.GetAxisRaw("Horizontal");
+            #endif
+            #if UNITY_IOS || UNITY_ANDROID
+            horizontal = -joystick.Horizontal;
+            #endif
             Flip();
             animator.SetBool("isGrounded", isGrounded());
-            animator.SetBool("isMoving", isMoving());           
-            if (Input.GetButtonDown("Jump") && isGrounded() && canMove)
-            {                
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            }
+            animator.SetBool("isMoving", isMoving());
+            if (Input.GetButtonDown("Jump"))
+                Jump();
         }
         private void FixedUpdate()
         {
@@ -57,6 +61,13 @@ namespace Gameplay.Movement
                 Vector3 localScale = transform.localScale;
                 localScale.x *= -1f;
                 transform.localScale = localScale;
+            }
+        }       
+        public void Jump()
+        {
+            if (isGrounded() && canMove)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
         }
     }

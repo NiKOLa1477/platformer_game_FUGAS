@@ -13,5 +13,9 @@ namespace UI.Login
         {
             PlayerManager.AddPlayer(NameInput.text);
         }
+        public void Delete()
+        {
+            PlayerManager.RemovePlayer(NameInput.text);
+        }
     }
 }

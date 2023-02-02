@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Gameplay.Movement.Ladder
+namespace Gameplay.Movement
 {
     [RequireComponent(typeof(Movement))]
     public class LadderMovement : MonoBehaviour
@@ -20,12 +20,14 @@ namespace Gameplay.Movement.Ladder
         // Update is called once per frame
         void Update()
         {
+            #if UNITY_STANDALONE
             vertical = Input.GetAxis("Vertical");
             if(isLadder && Mathf.Abs(vertical) > 0f && PlayerMovement.canMoving())
             {
                 isClimbing = true;
                 animator.SetBool("isClimbing", isClimbing);
             }
+            #endif
         }
         private void FixedUpdate()
         {
